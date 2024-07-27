@@ -139,6 +139,6 @@ export class Advice {
       this.Logger.info(`Deleted ${photo_path}`)
     }
 
-    this.Logger.info(`Finished advice in ${t_end - t_start}. Buffer size ${buffer.length}`)
+    this.Logger.info(`Finished advice in ${t_end - t_start}. Buffer size ${buffer.length/1024}kb`)
   }
 }
