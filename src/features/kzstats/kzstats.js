@@ -39,8 +39,8 @@ export class KZStats {
    */
   callback = async (ctx, next) => {
     let server = await Server({
-      ip: GOOD_HL_SERVER_IP[0],
-      port: GOOD_HL_SERVER_IP[1]
+      ip: CLIMB_IP[0],
+      port: CLIMB_IP[1]
     })
 
     let info = await server.getInfo()
@@ -50,10 +50,11 @@ export class KZStats {
       score: player.score
     })).sort(sortByScore)
 
-    envelope = [{ ip: '555', map: 'crossfire' }, ...envelope]
-
-
-    let message = "```" + not_a_log.table(envelope) + "```"
+    let message = 
+    "```" +
+    not_a_log.table(envelope) +
+    `Map: ${info.map}` +
+    "```"
 
     ctx.replyWithMarkdownV2(message)
     server.disconnect()

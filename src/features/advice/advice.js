@@ -65,6 +65,7 @@ export class Advice {
   
     ctx.fillStyle = 'white'
     ctx.strokeStyle = 'black'
+    ctx.lineJoin = 'round';
     ctx.lineWidth = 5
     ctx.textAlign = 'center'
   
@@ -85,8 +86,6 @@ export class Advice {
     const buffer = canvas.toBuffer('image/jpeg')
     return buffer
   }
-
-  
 
   /**
    * @method
@@ -110,12 +109,14 @@ export class Advice {
     let [top_text, bottom_text] = captions_source.toCaptions()
   
     let photo_id = (ctx.message.photo || ctx.message.reply_to_message?.photo)?.pop().file_id || undefined
+    let downloaded_image = false
     let photo_path = ''
   
     if (photo_id) {
       try {
         let url = await ctx.telegram.getFileLink(photo_id)
         photo_path = await downloadFile(url)
+        downloaded_image = true
       } catch (error) {
         this.Logger.error('An error occured while retrieving image from telegram server.')
         this.Logger.error(error)
@@ -129,6 +130,11 @@ export class Advice {
     
     let buffer = await this.createMeme(image, top_text?.toUpperCase(), bottom_text?.toUpperCase())
     this.Logger.info(buffer.length)
-    ctx.replyWithPhoto({ source: buffer }, { reply_to_message_id: ctx.message.reply_to_message })
+    await ctx.replyWithPhoto({ source: buffer }, { reply_to_message_id: ctx.message.reply_to_message })
+
+    if(downloaded_image) {
+      this.Logger.info(`Unlinking ${photo_path}`)
+      fs.unlinkSync(photo_path)
+    }
   }
 }

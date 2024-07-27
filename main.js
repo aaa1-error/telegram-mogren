@@ -1,7 +1,7 @@
 import { Telegraf } from "telegraf"
 import dotenv from "dotenv"
 import Logger from "@ptkdev/logger"
-import { loggerConfig } from "./config.js"
+import { HELP_MOTD, loggerConfig } from "./config.js"
 import { Advice } from "./src/features/advice/advice.js"
 import { KZStats } from "./src/features/kzstats/kzstats.js"
 
@@ -12,7 +12,8 @@ const advice = new Advice(logger)
 const kzstats = new KZStats(logger)
 
 bot.on('message', advice.adviceCallback).catch((error, ctx) => {
-  logger.error(error)
+  logger.error(JSON.stringify(error))
+  logger.error(`${ctx.chat.id}/${ctx.message.message_id}`)
 })
 
 bot.command('error', (ctx) => {
@@ -21,5 +22,8 @@ bot.command('error', (ctx) => {
 })
 
 bot.command('kzstats', kzstats.callback)
+bot.command('help', (ctx) => {
+  ctx.reply(HELP_MOTD)
+})
 
 bot.launch(() => logger.info('MorgenBot started'))
