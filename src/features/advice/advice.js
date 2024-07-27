@@ -128,13 +128,17 @@ export class Advice {
     this.Logger.info(photo_path)
     let image = await loadImage(photo_path)
     
+    let t_start = performance.now()
     let buffer = await this.createMeme(image, top_text?.toUpperCase(), bottom_text?.toUpperCase())
-    this.Logger.info(buffer.length)
+    let t_end = performance.now()
+
     await ctx.replyWithPhoto({ source: buffer }, { reply_to_message_id: ctx.message.reply_to_message })
 
     if(downloaded_image) {
-      this.Logger.info(`Unlinking ${photo_path}`)
       fs.unlinkSync(photo_path)
+      this.Logger.info(`Deleted ${photo_path}`)
     }
+
+    this.Logger.info(`Finished advice in ${t_end - t_start}. Buffer size ${buffer.length}`)
   }
 }
