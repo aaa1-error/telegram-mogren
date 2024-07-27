@@ -1,0 +1,21 @@
+{
+  "name": "telegram-mogren",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "navi vortep",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@fabricio-191/valve-server-query": "^4.1.9",
+    "@ptkdev/logger": "^1.8.0",
+    "canvas": "^2.11.2",
+    "dotenv": "^16.4.5",
+    "gm": "^1.25.0",
+    "not-a-log": "^1.0.1",
+    "telegraf": "^4.16.3",
+    "uuid": "^10.0.0"
+  },
+  "scripts": {
+    "start": "npx nodemon -q main.js"
+  }
+}
