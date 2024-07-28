@@ -125,7 +125,7 @@ export class Advice {
       photo_path = `${IMAGES_PATH}/${this.Images.random()}`
     }
   
-    this.Logger.info(photo_path)
+    this.Logger.debug(photo_path)
     let image = await loadImage(photo_path)
     
     let t_start = performance.now()
@@ -136,9 +136,9 @@ export class Advice {
 
     if(downloaded_image) {
       fs.unlinkSync(photo_path)
-      this.Logger.info(`Deleted ${photo_path}`)
+      this.Logger.debug(`Deleted ${photo_path}`)
     }
 
-    this.Logger.info(`Finished advice in ${(t_end - t_start).toFixed(3)}ms. Buffer size ${Math.floor(buffer.length/1024)}kb`)
+    this.Logger.debug(`Finished advice in ${(t_end - t_start).toFixed(3)}ms. Buffer size ${Math.floor(buffer.length/1024)}kb`)
   }
 }

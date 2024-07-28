@@ -26,4 +26,4 @@ bot.command('help', (ctx) => {
   ctx.reply(HELP_MOTD)
 })
 
-bot.launch(() => logger.info('MorgenBot started'))
+bot.launch(() => logger.debug('MorgenBot started'))

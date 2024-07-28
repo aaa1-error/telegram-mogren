@@ -1,5 +1,13 @@
+import Logger from "@ptkdev/logger"
+
 export const loggerConfig = {
-   
+  path: {
+    debug_log: "./debug.log",
+    error_log: "./error.log",
+  },
+  rotate: {
+    size: "10M"
+  }
 }
 
 export const IMAGES_PATH = './images'
@@ -10,4 +18,5 @@ export const GOOD_HL_SERVER_IP = ['143.42.54.115', 27012]
 export const HELP_MOTD = 
 `
 Команды этого чудобота:
-адвайс [верхний текст] // [нижний текст] — создаёт top text/bottom text мем.`
+адвайс [верхний текст] // [нижний текст] — создаёт top text/bottom text мем.
+`
