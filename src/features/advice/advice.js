@@ -21,15 +21,6 @@ export class Advice {
   Images = [];
 
   /**
-   * @type {{
-   * PathToImages: string,
-   * CachePath: string,
-   * MaxResolution: number
-   * }}
-   */
-  Config;
-
-  /**
    * @param {Logger} logger 
    */
   constructor(logger = new Logger(loggerConfig)) {
@@ -108,7 +99,8 @@ export class Advice {
   
     let [top_text, bottom_text] = captions_source.toCaptions()
   
-    let photo_id = (ctx.message.photo || ctx.message.reply_to_message?.photo)?.pop().file_id || undefined
+    let message_photo = ctx.message.photo || ctx.message.reply_to_message?.photo
+    let photo_id = message_photo?.pop().file_id || undefined
     let downloaded_image = false
     let photo_path = ''
   
@@ -139,6 +131,6 @@ export class Advice {
       this.Logger.debug(`Deleted ${photo_path}`)
     }
 
-    this.Logger.debug(`Finished advice in ${(t_end - t_start).toFixed(3)}ms. Buffer size ${Math.floor(buffer.length/1024)}kb`)
+    this.Logger.debug(`Done ${Math.floor(buffer.length/1024)}kb in ${(t_end - t_start).toFixed(3)}`)
   }
 }
