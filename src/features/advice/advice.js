@@ -45,7 +45,7 @@ export class Advice {
     if(Math.max(width, height) > MAX_ADVICE_RESOLUTION) {
       let result = resizeImage(width, height, MAX_ADVICE_RESOLUTION)
       width = result[0]
-      width = result[1]
+      height = result[1]
     }
   
     const canvas = createCanvas(width, height)
