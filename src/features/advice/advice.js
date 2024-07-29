@@ -43,7 +43,6 @@ export class Advice {
     let width = image.width, height = image.height
 
     if(Math.max(width, height) > MAX_ADVICE_RESOLUTION) {
-      this.Logger.warning(`${imagesPath} has its dimensions exceeding ${MAX_ADVICE_RESOLUTION}px. The image will be resized.`)
       let result = resizeImage(width, height, MAX_ADVICE_RESOLUTION)
       width = result[0]
       width = result[1]
