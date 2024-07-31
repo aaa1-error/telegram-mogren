@@ -1,18 +1,11 @@
 import { Context, Telegram } from "telegraf";
 import { v6 as uuidv6 } from "uuid";
 import fs from "fs"
-import { CACHE_PATH } from "../config.js";
+import { CACHE_PATH, IMAGES_PATH } from "../config.js";
 import { Console } from "console";
 import { Transform } from "stream";
 
 export const rawArguments = (command, text) => text.replace(`/${command}`, "").trim()
-
-export const log = (data) => {
-  let date = new Date()
-  //let timestamp = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-  let timestamp = new Date().toLocaleTimeString();
-  console.log(`[${timestamp}] ${data}`)
-}
 
 /**
  * @param {string} string
@@ -61,10 +54,6 @@ export const downloadFile = async (url) => {
   let buffer = Buffer.from(data)
   fs.writeFileSync(path, buffer)
   return path
-}
-
-export const readDirectory = () => {
-  return fs.promises.readdir('./images')
 }
 
 Array.prototype.random = function () {

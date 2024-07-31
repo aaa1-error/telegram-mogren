@@ -109,27 +109,27 @@ export class Advice {
         photo_path = await downloadFile(url)
         downloaded_image = true
       } catch (error) {
-        this.Logger.error('An error occured while retrieving image from telegram server.')
+        this.Logger.error('An error occured while retrieving image from the Telegram server.')
         this.Logger.error(error)
+
+        downloaded_image = false
+        photo_path = `${IMAGES_PATH}/${this.Images.random()}`
       }
     } else {
       photo_path = `${IMAGES_PATH}/${this.Images.random()}`
     }
   
-    this.Logger.debug(photo_path)
     let image = await loadImage(photo_path)
-    
+
     let t_start = performance.now()
     let buffer = await this.createMeme(image, top_text?.toUpperCase(), bottom_text?.toUpperCase())
     let t_end = performance.now()
 
     await ctx.replyWithPhoto({ source: buffer }, { reply_to_message_id: ctx.message.reply_to_message })
 
-    if(downloaded_image) {
+    if(downloaded_image)
       fs.unlinkSync(photo_path)
-      this.Logger.debug(`Deleted ${photo_path}`)
-    }
 
-    this.Logger.debug(`Done ${Math.floor(buffer.length/1024)}kb in ${(t_end - t_start).toFixed(3)}`)
+    this.Logger.debug(`${Math.floor(buffer.length/1024)}kb in ${(t_end - t_start).toFixed(3)}ms`)
   }
 }
