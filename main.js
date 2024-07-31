@@ -22,12 +22,6 @@ bot.on('message', advice.adviceCallback).catch((error, ctx) => {
   logger.error(`${ctx.chat.id}/${ctx.message.message_id}`)
 })
 
-
-bot.command('error', (ctx) => {
-  logger.error("FAKE ERROR")
-  ctx.reply('Умник хуев', { reply_to_message_id: ctx.message.message_id })
-})
-
 bot.command('help', (ctx) => {
   ctx.reply(HELP_MOTD)
 })

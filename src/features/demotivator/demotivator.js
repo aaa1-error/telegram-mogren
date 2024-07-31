@@ -1,4 +1,5 @@
 import Logger from "@ptkdev/logger";
+import { Context } from "telegraf";
 
 export class Demotivator {
    /**
@@ -16,7 +17,7 @@ export class Demotivator {
    * @param {Context} ctx 
    * @param {Promise<void>} next 
    */
-  callback = (ctx, next) => {
+  callback = async (ctx, next) => {
     
   }
 }
