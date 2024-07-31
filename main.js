@@ -4,6 +4,9 @@ import Logger from "@ptkdev/logger"
 import { CACHE_PATH, HELP_MOTD, IMAGES_PATH, loggerConfig } from "./config.js"
 import { Advice } from "./src/features/advice/advice.js"
 import fs from 'fs'
+import { registerFont } from "canvas"
+
+registerFont('assets/impact.ttf', { family: 'Impact' })
 
 dotenv.config()
 

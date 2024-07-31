@@ -49,6 +49,7 @@ export class Advice {
     }
   
     const canvas = createCanvas(width, height)
+    
     const ctx = canvas.getContext('2d')
   
     ctx.drawImage(image, 0, 0, width, height)
@@ -120,16 +121,11 @@ export class Advice {
     }
   
     let image = await loadImage(photo_path)
-
-    let t_start = performance.now()
     let buffer = await this.createMeme(image, top_text?.toUpperCase(), bottom_text?.toUpperCase())
-    let t_end = performance.now()
 
     await ctx.replyWithPhoto({ source: buffer }, { reply_to_message_id: ctx.message.reply_to_message })
 
     if(downloaded_image)
       fs.unlinkSync(photo_path)
-
-    this.Logger.debug(`${Math.floor(buffer.length/1024)}kb in ${(t_end - t_start).toFixed(3)}ms`)
   }
 }

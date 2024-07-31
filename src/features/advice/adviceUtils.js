@@ -4,8 +4,6 @@ import Logger from "@ptkdev/logger";
 import { loggerConfig } from "../../../config.js";
 const logger = new Logger(loggerConfig)
 
-registerFont('assets/impact.ttf', { family: 'Impact' })
-
 /**
  * 
  * @param {number} width 
