@@ -9,6 +9,7 @@
     "@fabricio-191/valve-server-query": "^4.1.9",
     "@ptkdev/logger": "^1.8.0",
     "canvas": "^2.11.2",
+    "canvas-emoji": "^1.1.9",
     "dotenv": "^16.4.5",
     "gm": "^1.25.0",
     "not-a-log": "^1.0.1",

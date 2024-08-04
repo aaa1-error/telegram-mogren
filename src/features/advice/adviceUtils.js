@@ -27,41 +27,26 @@ export function resizeImage(width, height, maxResolution) {
  * @param {string} text 
  * @param {number} maxWidth 
  * @param {number} baseFontSize 
- * @returns {number}
+ * @returns {[number, TextMetrics]} 
  */
 export function fitText(ctx, text, maxWidth, baseFontSize) {
   let fontSize = baseFontSize
+  let initialFont = ctx.font
 
   do {
     ctx.font = `${fontSize}px Impact`
-    if (ctx.measureText(text).width <= maxWidth) {
-      break
-    }
-    fontSize -= 3
-  } while (fontSize > 10)
+    var measurement = ctx.measureText(text)
 
+    if(measurement.width <= maxWidth)
+      break
+
+    fontSize -= 2
+  } while(fontSize > 3)
+
+  ctx.font = initialFont
   return fontSize
 }
 
+export function drawText(ctx, text, y) {
 
-export const TELEGRAM_API_MAX_IMAGE_RATIO = 20
-
-/**
- * @param {number} width 
- * @param {number} height 
- */
-export const checkImageRatio = (width, height) => {
-  let ratio = width / height
-  return ratio >= TELEGRAM_API_MAX_IMAGE_RATIO || ratio >= 1/TELEGRAM_API_MAX_IMAGE_RATIO
-}
-
-
-const TELEGRAM_API_MAX_IMAGE_DIMENSION_SUM = 10000
-
-/**
- * @param {number} width 
- * @param {number} height 
- */
-export const checkImageResolution = (width, height) => {
-  return width + height >= TELEGRAM_API_MAX_IMAGE_DIMENSION_SUM
 }

@@ -1,4 +1,5 @@
 .cache/*
+images/*
 node_modules
 .env
 *.log

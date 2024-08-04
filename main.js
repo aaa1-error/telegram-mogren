@@ -7,6 +7,7 @@ import fs from 'fs'
 import { registerFont } from "canvas"
 
 registerFont('assets/impact.ttf', { family: 'Impact' })
+registerFont('assets/emoji.ttf', { family: 'Emoji' })
 
 dotenv.config()
 
@@ -20,7 +21,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN)
 const logger = new Logger(loggerConfig)
 const advice = new Advice(logger)
 
-bot.on('message', advice.adviceCallback).catch((error, ctx) => {
+bot.on('message', (ctx) => {
+  advice.adviceCallback(ctx)
+}).catch((error, ctx) => {
   logger.error(error)
   logger.error(`${ctx.chat.id}/${ctx.message.message_id}`)
 })
@@ -30,3 +33,4 @@ bot.command('help', (ctx) => {
 })
 
 bot.launch(() => logger.debug('MorgenBot started'))
+
